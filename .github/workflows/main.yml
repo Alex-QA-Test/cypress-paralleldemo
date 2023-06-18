@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+      - image: timbru31/java-node:8-jdk-gallium
 
       - name: Install Allure command-line tool
         run: npm install -g allure-commandline --save-dev
@@ -44,4 +44,5 @@ jobs:
         with:
           personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./allure-report
+          
 

@@ -2,12 +2,6 @@ name: CI
 
 on: [push]
 
-defaults:
-  run:
-    working-directory: ${{ github.workspace }}
-
-env:
-  wd: ${{ github.repository }}
 
 jobs:
   test:
@@ -29,9 +23,6 @@ jobs:
         with:
           name: test-results
           path: allure-results
-
-    outputs:
-      test-results-path: ${{ steps.upload.outputs.artifactPath }}
 
   reporting:
     needs: test
@@ -57,6 +48,5 @@ jobs:
       - name: Publish report
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./allure-report
 

@@ -28,16 +28,13 @@ jobs:
     needs: test
 
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-      - image: timbru31/java-node:8-jdk-gallium
-
-      - name: Install Allure command-line tool
-        run: npm install -g allure-commandline --save-dev
-
-      - name: Generate Allure report
-        run: allure generate allure-results --clean -o allure-report
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+                  allure_results: allure-results
+                  gh_pages: allure
 
       - name: Publish report
         uses: peaceiris/actions-gh-pages@v3
